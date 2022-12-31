@@ -5,6 +5,8 @@ const rateLimit = require('express-rate-limit');
 const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/authRoutes');
+const profileRoutes = require('./routes/profileRoutes');
+const crudRoutes = require('./routes/crudRoutes');
 
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minutes
@@ -34,6 +36,9 @@ app.use(
 );
 
 app.use('/api', authRoutes);
+app.use('/api', profileRoutes);
+app.use('/api', crudRoutes);
+
 // TODO: request count
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.originalUrl}`);
